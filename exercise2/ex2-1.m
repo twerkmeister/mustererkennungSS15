@@ -1,9 +1,12 @@
+global trainingData;
+global k;
+
 trainingData = load("../data/chickwts_training.csv");
 testData = load("../data/chickwts_testing.csv");
-k=5;
+k=1;
 
 function food = classify(chickenWeight)
-  global trainingData
+  global trainingData;
   global k;
   knnData = sortrows([trainingData abs(chickenWeight - trainingData(:, 2))],4);
   topk = knnData(1:k,3);
