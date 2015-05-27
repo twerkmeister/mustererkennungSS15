@@ -12,28 +12,17 @@ function error = regressionError(X, Y)
   error = sum((X - Y).**2);
 end
 
-global Y = data(:, columns(data));
-global pset = powerset(1:columns(data)-1);
+Y = data(:, columns(data));
+pset = powerset(1:columns(data)-1);
+resultPoints = [];
 
-function minerror = minimalError(n)
-	global pset;
-	global data;
-	global Y;
-
-	indices = cellfun(@(x) length(x)==n, pset);
-	variableSets = pset(indices);
-
-	minerror = Inf;
-
-	for i = 1:length(variableSets)
-		X = [ones(length(data), 1) data(:,variableSets{i})];
-		theta = linearRegression(X, Y);
-		predicted = predict(theta, X);
-		minerror = min(regressionError(predicted, Y), minerror);
-	end
-	# minerror /= nchoosek(columns(data)-1, n);
+# skipping empty set
+for i = 2:length(pset)
+	set = pset{i};
+	X = [ones(length(data), 1) data(:,set)];
+	theta = linearRegression(X, Y);
+	predicted = predict(theta, X);
+	resultPoints = [resultPoints; [length(set) regressionError(predicted, Y)]];
 end
 
-results = arrayfun(@minimalError, 1:columns(data)-1);
-
-plot(results, "-d")
+scatter(resultPoints(:,1), resultPoints(:,2));
