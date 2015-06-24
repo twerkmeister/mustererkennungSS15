@@ -15,15 +15,22 @@ functionNumber([1.0, 1.0, 0.0])
 
 function sample = sphereSample()
   do
-    sample = unifrnd(-1, 1, 3, 1);
+    sample = unifrnd(-1, 1, 1, 3);
     length = norm(sample);
     sample = sample / length;
   until length <= 1
 end
 
-samples = cell2mat(arrayfun(@sphereSample, [1:10000], "UniformOutput", false))';
-scatter3(samples(:,1), samples(:,2), samples(:,3));
+samples = arrayfun(@sphereSample, [1:100], "UniformOutput", false);
+sampleMat = cell2mat(samples);
+#scatter3(sampleMat(:,1), sampleMat(:,2), sampleMat(:,3));
 
 #c
 
-functions = arrayfun(@functionNumber, samples);
+functions = cellfun(@functionNumber, samples);
+histdata = arrayfun(@(n) sum(functions == n), [0:15]) / length(samples);
+ratio = max(histdata) / min(histdata(histdata > 0))
+bar(histdata);
+
+#d
+
