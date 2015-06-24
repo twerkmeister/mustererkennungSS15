@@ -7,9 +7,9 @@ function f = functionNumber(w)
   f = (w*tupels >= 0) * [1,2,4,8]';
 end
 
-f_1 = functionNumber([0.3, 0.4, 0.5])
-f_2 = functionNumber([-0.2, 0.8, 0.3])
-f_3 = functionNumber([1.0, 1.0, 0.0])
+v1 = functionNumber([0.3, 0.5, -0.4])
+v2 = functionNumber([-0.8, -0.6, 0.5])
+v3 = functionNumber([0.7, 0.6, -1.0])
 
 #b
 
