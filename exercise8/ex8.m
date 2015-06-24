@@ -7,9 +7,9 @@ function f = functionNumber(w)
   f = (w*tupels >= 0) * [1,2,4,8]';
 end
 
-functionNumber([0.3, 0.4, 0.5])
-functionNumber([-0.2, 0.8, 0.3])
-functionNumber([1.0, 1.0, 0.0])
+f_1 = functionNumber([0.3, 0.4, 0.5])
+f_2 = functionNumber([-0.2, 0.8, 0.3])
+f_3 = functionNumber([1.0, 1.0, 0.0])
 
 #b
 
@@ -21,16 +21,16 @@ function sample = sphereSample()
   until length <= 1
 end
 
-samples = arrayfun(@sphereSample, [1:100], "UniformOutput", false);
-sampleMat = cell2mat(samples);
-#scatter3(sampleMat(:,1), sampleMat(:,2), sampleMat(:,3));
+samples = arrayfun(@sphereSample, [1:1000], "UniformOutput", false);
+sampleMat = cell2mat(samples');
+scatter3(sampleMat(:,1), sampleMat(:,2), sampleMat(:,3));
 
 #c
 
 functions = cellfun(@functionNumber, samples);
 histdata = arrayfun(@(n) sum(functions == n), [0:15]) / length(samples);
+bar([0:15], histdata);
 ratio = max(histdata) / min(histdata(histdata > 0))
-bar(histdata);
 
 #d
 
