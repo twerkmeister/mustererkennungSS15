@@ -1,4 +1,4 @@
-k = 8;
+k = 4;
 global alpha = 0.3;
 training = load("../data/pendigits-training.txt");
 testing = load("../data/pendigits-testing.txt");
@@ -40,11 +40,12 @@ end
 
 testing_predicted = zeros(rows(X_test));
 for i = 1:rows(X_test)
-  o0 = X_train(i,:);
+  o0 = X_test(i,:);
   [predicted,D1,D2,o0_,o1_] = feedForward(o0);
-  observed = solutionToVector(Y_train(i));
+  observed = solutionToVector(Y_test(i));
   [E,eVec] = calculateError(predicted, observed);
   testing_predicted(i) = vectorToSolution(predicted);
 end
 
-confusionmat(Y_test,testing_predicted)
+C = confusionmat(Y_test,testing_predicted)
+accuracy = evaluate(C)
