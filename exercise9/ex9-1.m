@@ -5,26 +5,12 @@ global W1_ = rand(3,2);
 global W2_ = rand(3,1);
 
 function sample = sampleInput()
-  % display("sampleInput")
-  % display("====================================")
   global possibleInputs
-  % display("possibleInputs")
-  % display(possibleInputs)
   sample = possibleInputs(randi(length(possibleInputs)),:);
-  % display("sample")
-  % display(sample)
-  % display("====================================")
 end
 
 function solution = solve(sample)
-  % display("solve")
-  % display("====================================")
-  % display("sample")
-  % display(sample)
   solution = xor(sample(1), sample(2));
-  % display("solution")
-  % display(solution)
-  % display("====================================")
 end
 
 function test()
@@ -53,4 +39,3 @@ end
 display(W1_);
 display(W2_);
 test()
-
