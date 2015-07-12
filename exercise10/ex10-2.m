@@ -1,9 +1,9 @@
+clear all
+
 k = 16;
 data = load("../data/pendigits-training.txt");
 global OutN = 10;
 global W1_ = zeros(17,k) - 0.5;
-% global W1_ = rand(17,k);
-% global W2_ = rand(k+1, OutN);
 global W2_ = zeros(k+1, OutN) - 0.5;
 
 global alpha1 = zeros(size(W1_)) + 1;
@@ -94,5 +94,4 @@ do
   W2_ += gradient2;
   lastErrorDerivative1 = errorDerivative1;
   lastErrorDerivative2 = errorDerivative2;
-until testError > trainingError
-% until iteration > 100
+until testError > trainingError || iteration >= 10000

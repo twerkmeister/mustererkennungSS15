@@ -1,3 +1,5 @@
+clear all
+
 k = 16;
 global alpha = 1;
 data = load("../data/pendigits-training.txt");
@@ -64,4 +66,4 @@ do
   display(sprintf("Iteration: %d \n================== \nTrainingerror: %f \nTesterror: %f", iteration, trainingError, testError));
   W1_ += gradient1;
   W2_ += gradient2;
-until testError > trainingError
+until testError > trainingError || iteration >= 10000
